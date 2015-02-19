@@ -58,7 +58,7 @@ describe('Service: Error Handling Service', function () {
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('POST', '/auth/signIn').respond(200, '{ "role" : "admin" }');
+      $httpBackend.when('POST', '/auth/sign-in').respond(200, '{ "role" : "admin" }');
 
       service.signIn({
         user : 'user',
@@ -68,29 +68,41 @@ describe('Service: Error Handling Service', function () {
       $httpBackend.flush();
       expect(onSuccess).toHaveBeenCalledWith({ role : 'admin' });
       expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
-
     });
 
-    it('should call the REST service and after an error response invoke onError handler with response data', function() {
+    it('should call the REST service and after 405 error invoke handleHttpError passing onError handler', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('POST', '/auth/signIn').respond(405, '');
+      $httpBackend.when('POST', '/auth/sign-in').respond(405, '');
 
       service.signIn({
         user : 'user',
-        pass : 'pass'
+        pass : ''
       }, onSuccess, onError);
 
       $httpBackend.flush();
       expect(onSuccess).not.toHaveBeenCalled();
-      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ status: 405 }), onError, 'Sign-in');
+      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ data: '', status: 405  }), onError, 'Sign in');
     });
 
-  });
+    it('should call the REST service and after 500 error invoke handleHttpError passing onError handler', function() {
 
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/sign-in').respond(500, '{}');
+
+      service.signIn({}, onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).not.toHaveBeenCalled();
+      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ data: {}, status: 500 }), onError, 'Sign in');
+    });
+  });
 
   describe('Function: Sign Out', function() {
 
