@@ -6,7 +6,6 @@ describe('Service: Error Handling Service', function () {
       errorHandler,
       $httpBackend;
 
-  // load the controller's module
   beforeEach(function() {
 
     module('skyCore');
@@ -48,11 +47,40 @@ describe('Service: Error Handling Service', function () {
 
   describe('Function: Is Signed In', function() {
 
+    it('should call the remote service and after a successful response invoke onSuccess handler with response data', function() {
+
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/is-signed-in').respond(200, '{ "role" : "user" }');
+
+      service.isSignedIn(onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).toHaveBeenCalledWith({ role : 'user' });
+      expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
+    });
+
+    it('should call the remote service and after 403 error invoke handleHttpError passing onError handler', function() {
+
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/is-signed-in').respond(403, '');
+
+      service.isSignedIn(onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).not.toHaveBeenCalled();
+      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ data: '', status: 403 }), onError, 'Sign-in check');
+    });
   });
 
   describe('Function: Sign In', function() {
 
-    it('should call the REST service and after a successful response invoke onSuccess handler with response data', function() {
+    it('should call the remote service and after a successful response invoke onSuccess handler with response data', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
@@ -70,7 +98,7 @@ describe('Service: Error Handling Service', function () {
       expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
     });
 
-    it('should call the REST service and after 405 error invoke handleHttpError passing onError handler', function() {
+    it('should call the remote service and after 405 error invoke handleHttpError passing onError handler', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
@@ -88,7 +116,7 @@ describe('Service: Error Handling Service', function () {
       expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ data: '', status: 405  }), onError, 'Sign in');
     });
 
-    it('should call the REST service and after 500 error invoke handleHttpError passing onError handler', function() {
+    it('should call the remote service and after 500 error invoke handleHttpError passing onError handler', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
@@ -105,6 +133,36 @@ describe('Service: Error Handling Service', function () {
   });
 
   describe('Function: Sign Out', function() {
+
+    it('should call the remote service and after a successful response invoke onSuccess handler with response data', function() {
+
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/sign-out').respond(200, '{ "role" : "admin" }');
+
+      service.signOut(onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).toHaveBeenCalledWith({ role : 'admin' });
+      expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
+    });
+
+    it('should call the remote service and after 405 error invoke handleHttpError passing onError handler', function() {
+
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/sign-out').respond(404, '');
+
+      service.signOut(onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).not.toHaveBeenCalled();
+      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ data: '', status: 404  }), onError, 'Sign out');
+    });
 
   });
 

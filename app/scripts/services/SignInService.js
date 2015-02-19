@@ -17,6 +17,7 @@ angular.module('skyCore')
 		// environment-specific domain and root URL not to hardcode it in the service
 		var _root = env.remoteServiceBaseUrl();
 
+		// if reused in multiple services, should be moved to a separate service
 		var _handlePostRequest = function handleHttpRequest(path, payload, onSuccess, onError, operation) {
 			$http({
 				url : _root + path,
@@ -31,8 +32,8 @@ angular.module('skyCore')
 			});
 		};
 
-		// This implementation is tailored for the created Java backend (awareness of session on the backend).
-		// An alternative could be based on tokens
+		// implementation tailored for the created Java backend (awareness of session on the backend)
+		// an alternative solution can be based on tokens
 
 		return {
 			isSignedIn : function isSignedIn(onSuccess, onError) {
