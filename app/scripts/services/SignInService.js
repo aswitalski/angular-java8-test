@@ -37,7 +37,7 @@ angular.module('skyCore')
 
 		return {
 			isSignedIn : function isSignedIn(onSuccess, onError) {
-				_handlePostRequest('/auth/is-signed-in', '', onSuccess, onError, 'Sign-in check');
+				_handlePostRequest('/auth/check', '', onSuccess, onError, 'Sign-in check');
 			},
 			signIn : function signIn(credentials, onSuccess, onError) {
 				_handlePostRequest('/auth/sign-in', credentials, onSuccess, onError, 'Sign in');

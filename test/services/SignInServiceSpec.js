@@ -53,7 +53,7 @@ describe('Service: Error Handling Service', function () {
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('POST', '/auth/is-signed-in').respond(200, '{ "role" : "user" }');
+      $httpBackend.when('POST', '/auth/check').respond(200, '{ "role" : "user" }');
 
       service.isSignedIn(onSuccess, onError);
 
@@ -68,7 +68,7 @@ describe('Service: Error Handling Service', function () {
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('POST', '/auth/is-signed-in').respond(403, '');
+      $httpBackend.when('POST', '/auth/check').respond(403, '');
 
       service.isSignedIn(onSuccess, onError);
 
