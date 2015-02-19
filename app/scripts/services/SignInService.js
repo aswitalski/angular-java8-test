@@ -11,7 +11,7 @@
  */
 angular.module('skyCore')
 
-	.factory('skySignInService', ['skyEnvConfig', /*'skyErrorHandlingService',*/ '$http', function(env, /*errorHandler,*/ $http) {
+	.factory('skySignInService', ['skyEnvConfig', 'skyErrorHandlingService', '$http', function(env, errorHandler, $http) {
 
 		// environment-specific domain and root URL not to hardcode it in the service
 		var root = env.remoteServiceBaseUrl();
@@ -27,10 +27,10 @@ angular.module('skyCore')
 					data : credentials
 				})
 				.then(function signInSuccess(response) {
-					// TODO: handle
+					onSuccess(response.data);
 				})
 				.catch(function signInError(data, status, headers, config) {
-					//errorHandler.handleHttpError(data, onError, 'Sign-in');
+					errorHandler.handleHttpError(data, onError, 'Sign-in');
 				});
 			},
 			signOut : function signOut(onSuccess, onError) {

@@ -2,28 +2,37 @@
 
 describe('Service: Error Handling Service', function () {
 
+  var service,
+      errorHandler,
+      $httpBackend;
+
   // load the controller's module
   beforeEach(function() {
+
     module('skyCore');
     module(function($provide) {
-      $provide
-      .service('skyEnvConfig', function() {
+      $provide.service('skyEnvConfig', function() {
         this.remoteServiceBaseUrl = function() {
           return '';
         };
       })
-      /*.factory('skyErrorHandlingService', function() {
-        return {
-        };
-      });*/
+      $provide.value('skyErrorHandlingService', {
+        handleHttpError : jasmine.createSpy('handleHttpError'),
+        handleException : jasmine.createSpy('handleException')
+      });
     });
   });
 
-  var service;
-
-  beforeEach(inject(function (_skySignInService_) {
+  beforeEach(inject(function ($injector, _skySignInService_, _skyErrorHandlingService_) {
     service = _skySignInService_;
+    errorHandler = _skyErrorHandlingService_;
+    $httpBackend = $injector.get('$httpBackend');
   }));
+
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
 
   it('should expose "isSignedIn" function', function () {
     expect(service.isSignedIn).toEqual(jasmine.any(Function));
@@ -39,24 +48,49 @@ describe('Service: Error Handling Service', function () {
 
   describe('Function: Is Signed In', function() {
 
-    it('should call the REST service', function() {
+  });
+
+  describe('Function: Sign In', function() {
+
+    it('should call the REST service and after a successful response invoke onSuccess handler with response data', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
+      $httpBackend.when('POST', '/auth/signIn').respond(200, '{ "role" : "admin" }');
+
       service.signIn({
         user : 'user',
         pass : 'pass'
       }, onSuccess, onError);
-      // when
+
+      $httpBackend.flush();
+      expect(onSuccess).toHaveBeenCalledWith({ role : 'admin' });
+      expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
+
+    });
+
+    it('should call the REST service and after an error response invoke onError handler with response data', function() {
+
+      // given
+      var onSuccess = jasmine.createSpy('onSuccess');
+      var onError = jasmine.createSpy('onError');
+
+      $httpBackend.when('POST', '/auth/signIn').respond(405, '');
+
+      service.signIn({
+        user : 'user',
+        pass : 'pass'
+      }, onSuccess, onError);
+
+      $httpBackend.flush();
+      expect(onSuccess).not.toHaveBeenCalled();
+      expect(errorHandler.handleHttpError).toHaveBeenCalledWith(jasmine.objectContaining({ status: 405 }), onError, 'Sign-in');
     });
 
   });
 
-  describe('Function: Sign In', function() {
-
-  });
 
   describe('Function: Sign Out', function() {
 
