@@ -15,14 +15,6 @@
     "url": "https://github.com/aswitalski/angular-node-test/issues"
   },
   "homepage": "https://github.com/aswitalski/angular-node-test",
-  "jspm": {
-    "directories": {
-      "baseURL": "public"
-    },
-    "dependencies": {
-      "angular-mocks": "^1.3.11"
-    }
-  },
   "dependencies": {
   },
   "devDependencies": {
