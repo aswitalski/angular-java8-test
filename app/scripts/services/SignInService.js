@@ -12,15 +12,12 @@
  */
 angular.module('skyCore')
 
-	.factory('skySignInService', ['skyEnvConfig', 'skyErrorHandlingService', '$http', function(env, errorHandler, $http) {
-
-		// environment-specific domain and root URL not to hardcode it in the service
-		var _root = env.remoteServiceBaseUrl();
+	.factory('skySignInService', ['skyErrorHandlingService', '$http', function(errorHandler, $http) {
 
 		// if reused in multiple services, should be moved to a separate service
 		var _handlePostRequest = function handleHttpRequest(path, payload, onSuccess, onError, operation) {
 			$http({
-				url : _root + path,
+				url : path,
 				method : 'POST',
 				data : payload
 			})

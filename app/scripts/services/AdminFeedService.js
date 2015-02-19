@@ -13,10 +13,7 @@ angular.module('skyAdmin')
 
 	// pretty much the duplication of logic in sign-in service (in real-life conditions extracted to a separate one)
 
-	.factory('skyAdminFeedService', ['skyEnvConfig', 'skyErrorHandlingService', '$http', function(env, errorHandler, $http) {
-
-		// environment-specific domain and root URL not to hardcode it in the service
-		var root = env.remoteServiceBaseUrl();
+	.factory('skyAdminFeedService', ['skyErrorHandlingService', '$http', function(errorHandler, $http) {
 
 		return {
 			getAuthAttempts : function getAuthAttempts(onSuccess, onError) {
@@ -25,7 +22,7 @@ angular.module('skyAdmin')
 					// the path could actually be shorter, but just to demonstrate how to make it self-descriptive
 					// also - under "admin/**" which should have a different authorization rule on the server side
 					// (users with "admin" role only)
-					url : root + '/admin/feeds/auth-attempts.json',
+					url : '/admin/feeds/auth-attempts.json',
 					method : 'GET',
 					// params not defined, all authentication attempts fetched, filtering done on the frontend side
 					data : { }

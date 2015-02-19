@@ -10,11 +10,6 @@ describe('Service: Error Handling Service', function () {
 
     module('skyCore');
     module(function($provide) {
-      $provide.service('skyEnvConfig', function() {
-        this.remoteServiceBaseUrl = function() {
-          return '';
-        };
-      })
       $provide.value('skyErrorHandlingService', {
         handleHttpError : jasmine.createSpy('handleHttpError'),
         handleException : jasmine.createSpy('handleException')
