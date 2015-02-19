@@ -149,7 +149,7 @@ describe('Service: Error Handling Service', function () {
       expect(errorHandler.handleHttpError).not.toHaveBeenCalled();
     });
 
-    it('should call the remote service and after 405 error invoke handleHttpError passing onError handler', function() {
+    it('should call the remote service and after 404 error invoke handleHttpError passing onError handler', function() {
 
       // given
       var onSuccess = jasmine.createSpy('onSuccess');
