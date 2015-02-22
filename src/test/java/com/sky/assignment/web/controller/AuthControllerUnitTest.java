@@ -2,6 +2,7 @@ package com.sky.assignment.web.controller;
 
 import static com.sky.assignment.web.controller.AuthController.ATTR_USER_INFO;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.any;
@@ -26,13 +27,13 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.sky.assignment.dao.AuthAttemptDAO;
+import com.sky.assignment.exception.InvalidCredentialsException;
 import com.sky.assignment.model.AuthAttemptDto;
 import com.sky.assignment.model.AuthResult;
 import com.sky.assignment.model.CredentialsDto;
 import com.sky.assignment.model.UserInfoDto;
 import com.sky.assignment.model.UserRole;
 import com.sky.assignment.service.AuthService;
-
 
 public class AuthControllerUnitTest {
 	
@@ -96,8 +97,13 @@ public class AuthControllerUnitTest {
 		controller.setAuthService(authServiceMock);
 		controller.setAuthAttemptsDAO(daoMock);
 		
-		// when
-		controller.signIn(new CredentialsDto("admin", "admin"), sessionMock, requestMock);
+		InvalidCredentialsException ex = null;
+		try {
+			// when
+			controller.signIn(new CredentialsDto("admin", "admin"), sessionMock, requestMock);
+		} catch (InvalidCredentialsException e) {
+			ex = e;
+		}
 		
 		// then
 		verify(sessionMock, never()).setAttribute(eq(ATTR_USER_INFO), any());
@@ -107,6 +113,8 @@ public class AuthControllerUnitTest {
 		assertEquals("admin", params.get(0).getUsername());
 		assertEquals("127.0.0.1", params.get(0).getIp());
 		assertEquals(AuthResult.AUTH_ERROR, params.get(0).getResult());
+		
+		assertNotNull(ex);
 	}
 	
 	@Test

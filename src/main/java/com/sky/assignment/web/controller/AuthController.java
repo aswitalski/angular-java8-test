@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sky.assignment.common.SkyWebPaths.Auth;
 import com.sky.assignment.dao.AuthAttemptDAO;
+import com.sky.assignment.exception.InvalidCredentialsException;
 import com.sky.assignment.model.AuthAttemptDto;
 import com.sky.assignment.model.AuthResult;
 import com.sky.assignment.model.CredentialsDto;
@@ -24,7 +25,7 @@ import com.sky.assignment.service.AuthService;
 
 @Controller
 @RequestMapping(Auth.ROOT)
-public class AuthController {
+public class AuthController extends AbstractController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
@@ -50,20 +51,16 @@ public class AuthController {
 	@RequestMapping(value = Auth.SIGN_IN, method = RequestMethod.POST)
 	@ResponseBody
 	public UserInfoDto signIn(@RequestBody CredentialsDto credentials, HttpSession session, ServletRequest request) {
-		LOG.info("Sign in: " + credentials);
+		LOG.info("Sign in: " + credentials.getUsername());
 		UserInfoDto userInfo = authService.authenticate(credentials.getUsername(), credentials.getPassword());
-		AuthResult result;
 		if (userInfo != null) {
-			result = AuthResult.AUTH_SUCCESS;
 			session.setAttribute(ATTR_USER_INFO, userInfo);
+			authAttemptsDAO.insert(new AuthAttemptDto(credentials.getUsername(), AuthResult.AUTH_SUCCESS, request.getRemoteAddr(), new Date()));
+			return userInfo;
 		} else {
-			result = AuthResult.AUTH_ERROR;
+			authAttemptsDAO.insert(new AuthAttemptDto(credentials.getUsername(), AuthResult.AUTH_ERROR, request.getRemoteAddr(), new Date()));
+			throw new InvalidCredentialsException("Invalid username of password was provided!");
 		}
-
-		// TODO: should really be moved to an interceptor
-		authAttemptsDAO.insert(new AuthAttemptDto(credentials.getUsername(), result, request.getRemoteAddr(), new Date()));
-
-		return userInfo;
 	}
 	
 	/**
@@ -74,10 +71,10 @@ public class AuthController {
 	 */
 	@RequestMapping(value = Auth.SIGN_OUT, method = RequestMethod.POST)
 	@ResponseBody
-	public Object signOut(HttpSession session) {
+	public UserInfoDto signOut(HttpSession session) {
 		LOG.info("Sign out");
 		session.invalidate();
-		return new Object();
+		return new UserInfoDto("", null);
 	}
 	
 	/**

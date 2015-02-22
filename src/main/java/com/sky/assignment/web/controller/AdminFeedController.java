@@ -22,7 +22,7 @@ import com.sky.assignment.service.FeedService;
 
 @Controller
 @RequestMapping(Feed.ROOT)
-public class AdminFeedController {
+public class AdminFeedController extends AbstractController {
 	
 	@Autowired
 	private FeedService feedService;
