@@ -1,6 +1,6 @@
 package com.sky.assignment.service.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
@@ -32,17 +32,17 @@ public class DefaultFeedServiceUnitTest {
 		
 		// given
 		AuthAttemptDAO daoMock = mock(AuthAttemptDAO.class);
-		ArrayList<AuthAttemptDto> result = Lists.newArrayList();
-		result.add(new AuthAttemptDto("user", AuthResult.AUTH_SUCCESS, "127.0.0.1", new Date()));
-		when(daoMock.getAuthAttempts()).thenReturn(result);
+		ArrayList<AuthAttemptDto> authAttempts = Lists.newArrayList();
+		authAttempts.add(new AuthAttemptDto("user", AuthResult.AUTH_SUCCESS, "127.0.0.1", new Date()));
+		when(daoMock.getAuthAttempts()).thenReturn(authAttempts);
 		feedService.setDao(daoMock);
 		
 		// when
-		List<AuthAttemptDto> authAttempts = feedService.getAuthAttempts();
+		List<AuthAttemptDto> result = feedService.getAuthAttempts();
 		
 		// then
 		verify(daoMock, only()).getAuthAttempts();
-		assertEquals(result, authAttempts);
+		assertSame(authAttempts, result);
 
 	}
 	

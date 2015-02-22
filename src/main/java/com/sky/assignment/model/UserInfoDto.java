@@ -39,7 +39,7 @@ public class UserInfoDto extends AbstractDto {
 	public void setRole(UserRole role) {
 		this.role = role;
 	}
-
+	
 	private static final long serialVersionUID = 1L;
 
 }

@@ -19,7 +19,7 @@ import com.sky.assignment.service.AuthService;
 public class AuthController {
 	
 	/** Session attribute name. */
-	private static final String ATTR_USER_INFO = "user-info";
+	public static final String ATTR_USER_INFO = "user-info";
 
 	@Autowired
 	private AuthService authService;
