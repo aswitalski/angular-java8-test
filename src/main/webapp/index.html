@@ -19,9 +19,10 @@
     <style>[ng-cloak] { display: none !important; }</style>
 
     <div ng-controller="MainCtrl" ng-cloak>
-      <div ng-controller="SignInCtrl" ng-if="!loggedIn">
+
+      <div ng-controller="SignInCtrl" ng-if="!auth.role">
         <div class="overlay"></div>
-        <div class="panel animated bounceIn">
+        <div class="panel animated" ng-class="{ 'shake animated' : credentials.invalid }">
             <form name="loginForm" ng-submit="signIn()">
               <header>Please sign in</header>
               <input ng-model="credentials.username" type="text" placeholder="Username" autofocus />
@@ -30,6 +31,29 @@
               <error ng-if="signInError">{{ signInError }}</error>
             </form>
         </div>
+      </div>
+
+      <div class="content" ng-if="auth.role">
+        <a ng-click="signOut()" href="">Sign out</a>
+        <div ng-show="auth.role == 'ADMIN'" ng-controller="AdminCtrl">
+          <div class="info">Welcome {{ auth.username}}!</div>
+          <a ng-click="fetchLog()" href="">{{ attempts.length ? 'Refresh' : 'Fetch' }} log of authentication attempts</a>
+            <div class="log" ng-if="attempts.length">
+              <div class="header">
+                <div>Result</div>
+                <div>Username</div>
+                <div>IP</div>
+                <div>Date and time</div>
+              </div>
+              <div ng-repeat="attempt in attempts" class="attempt">
+                <div class="result"><span class="icon" ng-class="{ 'success' : attempt.result == 'AUTH_SUCCESS', 'error' : attempt.result == 'AUTH_ERROR' }"></span></div>
+                <div class="username">{{attempt.username}}</div>
+                <div class="ip">{{attempt.ip}}</div>
+                <div class="timestamp">{{ (attempt.timestamp * 1000) | date : 'yyyy-MM-dd HH:mm:ss'}}</div>
+              </div>
+            </div>
+        </div>
+        <div ng-show="auth.role == 'USER'" class="info">You are not authorized to access this page!</div>
        </div>
     </div>
 
@@ -43,5 +67,6 @@
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/MainCtrl.js"></script>
     <script src="/scripts/controllers/SignInCtrl.js"></script>
+    <script src="/scripts/controllers/AdminCtrl.js"></script>
 </body>
 </html>

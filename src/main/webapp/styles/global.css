@@ -69,3 +69,12 @@ body {
 	margin: 10px 0 0 0;
 	display: block;
 }
+
+.content {
+	margin-top: 20px;
+}
+
+a, a:active, a:hover, a:visited {
+	color: blue;
+	font-size: 9pt;
+}

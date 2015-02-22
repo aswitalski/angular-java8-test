@@ -45,7 +45,7 @@ describe('Service: Admin Feed Service', function () {
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('GET', '/admin/feeds/auth-attempts.json').respond(200, '[]');
+      $httpBackend.when('GET', '/admin/feed/auth-attempts').respond(200, '[]');
 
       service.getAuthAttempts(onSuccess, onError);
 
@@ -60,7 +60,7 @@ describe('Service: Admin Feed Service', function () {
       var onSuccess = jasmine.createSpy('onSuccess');
       var onError = jasmine.createSpy('onError');
 
-      $httpBackend.when('GET', '/admin/feeds/auth-attempts.json').respond(403, '');
+      $httpBackend.when('GET', '/admin/feed/auth-attempts').respond(403, '');
 
       service.getAuthAttempts(onSuccess, onError);
 

@@ -34,13 +34,13 @@ angular.module('skyCore')
 
 		return {
 			isSignedIn : function isSignedIn(onSuccess, onError) {
-				_handlePostRequest('/auth/check', '', onSuccess, onError, 'Sign-in check');
+				_handlePostRequest('/auth/check', {}, onSuccess, onError, 'Sign-in check');
 			},
 			signIn : function signIn(credentials, onSuccess, onError) {
 				_handlePostRequest('/auth/sign-in', credentials, onSuccess, onError, 'Sign in');
 			},
 			signOut : function signOut(onSuccess, onError) {
-				_handlePostRequest('/auth/sign-out', '', onSuccess, onError, 'Sign out');
+				_handlePostRequest('/auth/sign-out', {}, onSuccess, onError, 'Sign out');
 			}
 		};
 	}]);

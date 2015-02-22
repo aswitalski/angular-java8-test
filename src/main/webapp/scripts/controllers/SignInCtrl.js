@@ -10,9 +10,11 @@
  */
 angular.module('skyApp')
 
-	.controller('SignInCtrl', ['$scope', 'skySignInService', function ($scope, signInService) {
+	.controller('SignInCtrl', ['$scope', '$timeout', 'skySignInService', function ($scope, $timeout, signInService) {
 
 		$scope.credentials = {};
+
+		$scope.invalidCredentials = false;
 
 		var clearSignInError = function clearSignInError(newValue, oldValue) {
 			if (!angular.equals(newValue, oldValue)) {
@@ -29,9 +31,22 @@ angular.module('skyApp')
 				username : this.credentials.username,
 				password : this.credentials.password
 			}, function signInSuccess(data) {
+				self.credentials.username = '';
+				self.credentials.password = '';
+				self.credentials.invalid = false;
 				self.auth.role = data.role;
+				self.auth.username = data.username;
 			}, function signInError(error) {
-				self.signInError = 'Error signing in to application (code = ' + error.code + ')';
+				if (error.code == 401) {
+					self.credentials.invalid = true;
+					$timeout(function() {
+						self.credentials.invalid = false;
+					}, 1000);
+				} else {
+					self.signInError = 'Error signing in to application (code = ' + error.code + ')';
+				}
 			});
 		};
+
+		window.signInScope = $scope;
 	}]);

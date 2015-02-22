@@ -19,12 +19,8 @@ angular.module('skyAdmin')
 			getAuthAttempts : function getAuthAttempts(onSuccess, onError) {
 
 				$http({
-					// the path could actually be shorter, but just to demonstrate how to make it self-descriptive
-					// also - under "admin/**" which should have a different authorization rule on the server side
-					// (users with "admin" role only)
-					url : '/admin/feeds/auth-attempts.json',
+					url : '/admin/feed/auth-attempts',
 					method : 'GET',
-					// params not defined, all authentication attempts fetched, filtering done on the frontend side
 					data : { }
 				})
 				.then(function getAuthAttemptsSuccess(response) {

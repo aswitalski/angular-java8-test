@@ -1,0 +1,48 @@
+.log {
+	padding: 5px;
+	background-color: #f5f5f5;
+	width: 600px;
+	display: table;
+	margin: 10px auto 30px auto;
+	border-radius: 5px;
+	font-size: 10pt;
+}
+
+.log .attempt, .log .header {
+	display: table-row;
+}
+
+.log .header > div {
+	font-weight: bold;
+}
+
+.log .attempt > div, .log .header > div {
+	display: table-cell;
+	padding: 5px;
+}
+
+.result {
+
+}
+
+.result .icon {
+	width: 15px;
+	height: 15px;
+	display: block;
+	background-color: black;
+	border-radius: 50%;
+	margin: auto;
+}
+
+.result .icon.success {
+	background-color: rgb(30, 190, 30);
+}
+
+.result .icon.error {
+	background-color: red;
+}
+
+.content a {
+	margin: 10px auto;
+	display: inline-block;
+}
