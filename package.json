@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "karma": "^0.12.0",
-    "karma-jasmine": "^0.1.0"
+    "karma-jasmine": "^0.1.0",
+    "karma-phantomjs-launcher": "^0.1.4"
   },
   "precommit": [
     "test"
