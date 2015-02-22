@@ -68,4 +68,8 @@ public class AuthController {
 	public UserInfoDto isSignedIn(HttpSession session) {
 		return (UserInfoDto) session.getAttribute(ATTR_USER_INFO);
 	}
+	
+	protected void setAuthService(AuthService authService) {
+		this.authService = authService;
+	}
 }
