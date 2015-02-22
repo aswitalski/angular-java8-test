@@ -10,7 +10,7 @@ import com.sky.assignment.model.UserInfoDto;
 public interface AuthService {
 	
 	/**
-	 * Authenticates given user with given username and password.
+	 * Authenticates user with given username and password.
 	 * 
 	 * @param username
 	 *            Username

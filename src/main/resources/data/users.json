@@ -4,34 +4,34 @@
          "username":"admin",
          "password":"password"
       },
-      "role":"admin"
+      "role":"ADMIN"
    },
    {  
       "credentials":{  
          "username":"manager",
          "password":"password"
       },
-      "role":"user"
+      "role":"USER"
    },
    {  
       "credentials":{  
          "username":"developer",
          "password":"password"
       },
-      "role":"user"
+      "role":"USER"
    },
    {  
       "credentials":{  
          "username":"tester",
          "password":"password"
       },
-      "role":"user"
+      "role":"USER"
    },
    {  
       "credentials":{  
          "username":"user",
          "password":"password"
       },
-      "role":"user"
+      "role":"USER"
    }
 ]

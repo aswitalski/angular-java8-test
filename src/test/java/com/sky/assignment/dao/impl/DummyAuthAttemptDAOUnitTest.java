@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.sky.assignment.model.AuthAttemptDto;
 
-public class DummyAuthAttemptDAOTest {
+public class DummyAuthAttemptDAOUnitTest {
 	
 	private DummyAuthAttemptDAO dao;
 	
