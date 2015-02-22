@@ -17,7 +17,7 @@ angular.module('skyApp')
 			feedService.getAuthAttempts(function onSuccess(data) {
 				self.attempts = data;
 			}, function onError(error) {
-				debugger;
+				self.displayError(error);
 			});
 		};
 

@@ -55,6 +55,11 @@
         </div>
         <div ng-show="auth.role == 'USER'" class="info">You are not authorized to access this page!</div>
        </div>
+
+       <div class="panel error" ng-show="error" ng-click="error = undefined">
+          <div class="header>">Something went wrong!</div>
+          <div class="description">Error {{ error.code }} during operation: {{ error.operation }}</div>
+       </div>
     </div>
 
     <script src="/scripts/lib/jquery.js"></script>

@@ -43,7 +43,7 @@ angular.module('skyApp')
 						self.credentials.invalid = false;
 					}, 1000);
 				} else {
-					self.signInError = 'Error signing in to application (code = ' + error.code + ')';
+					self.displayError(error);
 				}
 			});
 		};
