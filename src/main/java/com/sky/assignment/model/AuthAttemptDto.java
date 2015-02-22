@@ -15,7 +15,7 @@ public class AuthAttemptDto extends AbstractDto {
 
 	private String ip;
 	
-	private Date timestamp;
+	private long timestamp;
 	
 	/**
 	 * Default constructor needed for deserialization.
@@ -32,16 +32,23 @@ public class AuthAttemptDto extends AbstractDto {
 	 *            Auth result
 	 * @param ip
 	 *            User ip
-	 * @param dateTime
-	 *            Timestamp
+	 * @param date
+	 *            Date
 	 */
-	public AuthAttemptDto(String username, AuthResult result, String ip, Date timestamp) {
+	public AuthAttemptDto(String username, AuthResult result, String ip, Date date) {
 		this.username = username;
 		this.result = result;
 		this.ip = ip;
-		this.timestamp = (timestamp != null ? new Date(timestamp.getTime()) : null);
+		this.timestamp = (date != null ? date.getTime() / 1000 : 0);
 	}
 	
+	public AuthAttemptDto(String username, AuthResult result, String ip, long timestamp) {
+		this.username = username;
+		this.result = result;
+		this.ip = ip;
+		this.timestamp = timestamp;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -66,12 +73,12 @@ public class AuthAttemptDto extends AbstractDto {
 		this.ip = ip;
 	}
 	
-	public Date getTimestamp() {
-		return timestamp != null ? new Date(timestamp.getTime()) : null;
+	public long getTimestamp() {
+		return timestamp;
 	}
 	
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = (timestamp != null ? new Date(timestamp.getTime()) : null);
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	private static final long serialVersionUID = 1L;

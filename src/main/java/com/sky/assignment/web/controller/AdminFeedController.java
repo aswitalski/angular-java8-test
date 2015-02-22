@@ -20,7 +20,8 @@ import com.sky.assignment.model.UserInfoDto;
 import com.sky.assignment.model.UserRole;
 import com.sky.assignment.service.FeedService;
 
-@Controller(Feed.ROOT)
+@Controller
+@RequestMapping(Feed.ROOT)
 public class AdminFeedController {
 	
 	@Autowired

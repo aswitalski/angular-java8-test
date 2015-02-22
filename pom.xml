@@ -97,9 +97,9 @@
 
 		</dependencies>
 	</dependencyManagement>
-	
-	<!-- Dependency management section separated from dependencies section
-		 what would be much more benefitial in multi-module setup -->
+
+	<!-- Dependency management section separated from dependencies section what would be much more benefitial in multi-module 
+		setup -->
 
 	<dependencies>
 
@@ -314,7 +314,7 @@ warSrcDirIsOutput=true]]>
 					<scanIntervalSeconds>0</scanIntervalSeconds>
 					<stopPort>9999</stopPort>
 					<stopKey>foo</stopKey>
-					<daemon>true</daemon>
+					<daemon>false</daemon>
 				</configuration>
 				<executions>
 					<execution>
@@ -323,6 +323,9 @@ warSrcDirIsOutput=true]]>
 						<goals>
 							<goal>start</goal>
 						</goals>
+						<configuration>
+							<daemon>true</daemon>
+						</configuration>
 					</execution>
 					<execution>
 						<id>stop-jetty</id>
