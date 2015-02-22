@@ -70,7 +70,7 @@ public class AdminFeedControllerUnitTest {
 		try {
 			controller.getAuthAttempts(sessionMock);
 		} catch (NotAuthorizedException e) {
-			// not using JUnit's expected attribute to ensure that service is not called
+			// not using JUnit's "expected" attribute to ensure that service is NOT called
 			ex = e;
 		}
 		
@@ -96,7 +96,7 @@ public class AdminFeedControllerUnitTest {
 		try {
 			controller.getAuthAttempts(sessionMock);
 		} catch (NotSignedInException e) {
-			// not using JUnit's expected attribute to ensure that service is not called
+			// not using JUnit's "expected" attribute to ensure that service is NOT called
 			ex = e;
 		}
 		

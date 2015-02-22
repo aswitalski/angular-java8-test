@@ -33,6 +33,10 @@ public class AdminFeedController {
 	@ResponseBody
 	public List<AuthAttemptDto> getAuthAttempts(HttpSession session) {
 		UserInfoDto userInfo = (UserInfoDto) session.getAttribute(ATTR_USER_INFO);
+		
+		// all the signed-in user checks should really be moved to a security aspect, but present here just to have more than a delegate
+		// and be able to write some "interesting" unit test
+
 		if (userInfo != null && userInfo.getRole() == UserRole.ADMIN) {
 			return feedService.getAuthAttempts();
 		} else if (userInfo == null) {
