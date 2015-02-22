@@ -1,0 +1,37 @@
+[  
+   {  
+      "credentials":{  
+         "username":"admin",
+         "password":"password"
+      },
+      "role":"admin"
+   },
+   {  
+      "credentials":{  
+         "username":"manager",
+         "password":"password"
+      },
+      "role":"user"
+   },
+   {  
+      "credentials":{  
+         "username":"developer",
+         "password":"password"
+      },
+      "role":"user"
+   },
+   {  
+      "credentials":{  
+         "username":"tester",
+         "password":"password"
+      },
+      "role":"user"
+   },
+   {  
+      "credentials":{  
+         "username":"user",
+         "password":"password"
+      },
+      "role":"user"
+   }
+]
