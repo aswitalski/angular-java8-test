@@ -10,11 +10,6 @@
  */
 angular
   .module('skyApp', [
-    //'ngAnimate',
-    //'ngCookies',
-    //'ngMessages',
-    //'ngResource',
-    //'ngTouch',
     'skyCore',
     'skyAdmin'
   ]);

@@ -18,8 +18,8 @@ module.exports = function(config) {
       '../../main/webapp/scripts/directives/**/*.js',
       '../../main/webapp/scripts/filters/**/*.js',
       '../../main/webapp/scripts/services/**/*.js',
-      //'app/scripts/controllers/**/*.js',
       '../../main/webapp/scripts/app.js',
+      '../../main/webapp/scripts/controllers/**/*.js',
       './**/*Spec.js'
     ],
 

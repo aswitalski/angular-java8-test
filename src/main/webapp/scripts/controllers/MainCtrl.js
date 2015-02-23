@@ -22,15 +22,13 @@ angular.module('skyApp')
 			$scope.error = error;
 		};
 
-		$scope.signOut = function signOut() {
-			var self = this;
-			signInService.signOut(function onSuccess() {
-				self.auth.role = '';
-				self.auth.username ='';
-			}, function onError(error) {
-				self.displayError(error);
-			});
+		$scope.clearAuth = function clearAuth() {
+			$scope.auth.role = '';
+			$scope.auth.username ='';
 		};
 
+		$scope.signOut = function signOut() {
+			signInService.signOut($scope.clearAuth, $scope.displayError);
+		};
 
 	}]);

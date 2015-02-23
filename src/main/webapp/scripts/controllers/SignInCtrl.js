@@ -47,6 +47,4 @@ angular.module('skyApp')
 				}
 			});
 		};
-
-		window.signInScope = $scope;
 	}]);
