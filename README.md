@@ -23,6 +23,7 @@ Because of the Java backend, the sign-in in based on sessions (with jsessionid b
   * define components with single responsibility
   * integrate the components with one another
   * fully unit test all the components
+  * provide good user experience
 
 ### If the application was developed further the next steps would be:
   * provide end-to-end testing
