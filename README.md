@@ -24,7 +24,7 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * define components with single responsibility
   * integrate the components with one another
   * fully unit test all the components
-  * create self-exlaining and easy-readable code
+  * create self-explaining and easy-readable code
   * construct the build process manually with full understanding of phases
   * provide good user experience
 
