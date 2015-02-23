@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Main Controller', function() {
   
   beforeEach(module('skyApp'));
@@ -15,7 +17,7 @@ describe('Main Controller', function() {
     });
   }));
 
-  it('$scope.auth should be set to an empty object', function() {
+  it('should set the $scope.auth to an empty object', function() {
     expect($scope.auth).toEqual({});
   });
 

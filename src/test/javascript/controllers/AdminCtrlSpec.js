@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Admin Controller', function() {
   
   beforeEach(module('skyApp'));
@@ -10,7 +12,7 @@ describe('Admin Controller', function() {
   	$rootScope.displayError = jasmine.createSpy('displayError');
     $scope = $rootScope.$new();
     feedService = {};
-    MainCtrl = $controller('AdminCtrl', {
+    AdminCtrl = $controller('AdminCtrl', {
       $scope: $scope,
       skyAdminFeedService : feedService
     });

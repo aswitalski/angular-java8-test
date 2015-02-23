@@ -14,37 +14,36 @@ angular.module('skyApp')
 
 		$scope.credentials = {};
 
-		$scope.invalidCredentials = false;
-
-		var clearSignInError = function clearSignInError(newValue, oldValue) {
-			if (!angular.equals(newValue, oldValue)) {
-				$scope.signInError = '';
-			}
+		$scope.onSignIn = function onSignIn(data) {
+			$scope.credentials.username = '';
+			$scope.credentials.password = '';
+			$scope.credentials.invalid = false;
+			$scope.auth.role = data.role;
+			$scope.auth.username = data.username;
 		};
 
-		$scope.$watch('credentials.username', clearSignInError);
-		$scope.$watch('credentials.password', clearSignInError);
+		$scope.markCredentialsAsInvalid = function markCredentialsAsInvalid() {
+			$scope.credentials.invalid = true;
+		};
+
+		$scope.markCredentialsAsValid = function markCredentialsAsValid() {
+			$scope.credentials.invalid = false;
+		};
+
+		$scope.customErrorHandler = function customErrorHandler(error) {
+			if (error.code == 401) {
+				// forces "shake" animation
+				$scope.markCredentialsAsInvalid();
+				$timeout($scope.markCredentialsAsValid, 1000);
+			} else {
+				$scope.displayError(error);
+			}
+		}
 
 		$scope.signIn = function signIn() {
-			var self = this;
 			signInService.signIn({
-				username : this.credentials.username,
-				password : this.credentials.password
-			}, function signInSuccess(data) {
-				self.credentials.username = '';
-				self.credentials.password = '';
-				self.credentials.invalid = false;
-				self.auth.role = data.role;
-				self.auth.username = data.username;
-			}, function signInError(error) {
-				if (error.code == 401) {
-					self.credentials.invalid = true;
-					$timeout(function() {
-						self.credentials.invalid = false;
-					}, 1000);
-				} else {
-					self.displayError(error);
-				}
-			});
+				username : $scope.credentials.username,
+				password : $scope.credentials.password
+			}, $scope.onSignIn, $scope.customErrorHandler);
 		};
 	}]);

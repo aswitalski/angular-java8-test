@@ -28,7 +28,6 @@
               <input ng-model="credentials.username" type="text" placeholder="Username" autofocus />
               <input ng-model="credentials.password" placeholder="Password" type="password" />
               <input type="submit" ng-disabled="!credentials.username || !credentials.password" value="Sign in" />
-              <error ng-if="signInError">{{ signInError }}</error>
             </form>
         </div>
       </div>
