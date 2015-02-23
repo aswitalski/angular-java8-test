@@ -5,7 +5,7 @@
 After conversation with Joffrey and me clearly stating that I do not have huge experience with node.js we agreed that I will implement the solution with a different backend stack - Java based.
 I went for Java 8 + Spring MVC running on Jetty 9. Because of such stack the build tool is Maven.
 
-I focused on providing clear and fully-unit tested solution on both frontend and backend sides.
+I focused on providing clear and fully unit-tested solution on both frontend and backend sides.
 (Because of lack of time and the agreed delivery date the end-to-end testing is not yet there, but all other work that was done hopefully is enough to grade the skills and the approach).
 
 ### To build the project
@@ -24,6 +24,7 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * define components with single responsibility
   * integrate the components with one another
   * fully unit test all the components
+  * provide integration tests for controllers
   * create self-explaining and easy-readable code
   * combine imperative and functional programming (lambdas used)
   * construct the build process manually with full understanding of phases
