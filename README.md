@@ -2,7 +2,7 @@
 
 ### First important thing is a remark that I did read the instruction with understanding :)
 
-During the initial conversation with Joffrey I clearly stated that I do not have huge experience with node.js we agreed that I will implement the solution with a different backend stack - Java based.
+During the initial conversation with Joffrey I clearly stated that I do not have huge experience with node.js. We agreed that I will implement the solution with a different backend stack - Java based.
 I went for Java 8 + Spring MVC running on Jetty 9. Because of such stack the build tool is Maven.
 
 I focused on providing clear and fully unit-tested solution on both frontend and backend sides.
