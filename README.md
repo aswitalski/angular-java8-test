@@ -35,5 +35,6 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * move authentication attempts data gathering to an interceptor
   * use the database instead of in-memory mock
   * (optional) change authentication and authorisation mechanisms to a token-based solution
+  * not to require the "index.html" in the path :)
 
 
