@@ -281,6 +281,7 @@ warSrcDirIsOutput=true]]>
 				</configuration>
 			</plugin>
 
+			<!-- 
 			<plugin>
 				<groupId>org.codehaus.gmaven</groupId>
 				<artifactId>groovy-maven-plugin</artifactId>
@@ -295,9 +296,9 @@ warSrcDirIsOutput=true]]>
 							<source>
 								<![CDATA[
 								println('')
-								println('------------------------------------------------')
+								println('================================================')
 								println('  STARTING JETTY SERVER FOR FUNCTIONAL TESTS')
-								println('------------------------------------------------')
+								println('================================================')
 								println('')
 								]]>
 							</source>
@@ -305,6 +306,7 @@ warSrcDirIsOutput=true]]>
 					</execution>
 				</executions>
 			</plugin>
+			-->
 
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
@@ -316,6 +318,7 @@ warSrcDirIsOutput=true]]>
 					<stopKey>foo</stopKey>
 					<daemon>false</daemon>
 				</configuration>
+				<!--
 				<executions>
 					<execution>
 						<id>start-jetty</id>
@@ -335,6 +338,7 @@ warSrcDirIsOutput=true]]>
 						</goals>
 					</execution>
 				</executions>
+				-->
 			</plugin>
 
 			<plugin>
@@ -391,7 +395,7 @@ warSrcDirIsOutput=true]]>
 					<skipKarma>false</skipKarma>
 					<skipTests>false</skipTests>
 					<karmaFailureIgnore>false</karmaFailureIgnore>
-					<reporters>dots,junit</reporters>
+					<reporters>dots</reporters>
 				</configuration>
 			</plugin>
 
