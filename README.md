@@ -25,6 +25,7 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * integrate the components with one another
   * fully unit test all the components
   * create self-explaining and easy-readable code
+  * combine imperative and functional programming (lambdas used)
   * construct the build process manually with full understanding of phases
   * provide good user experience
 
