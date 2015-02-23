@@ -33,6 +33,7 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * use directives and templates in the frontend
   * use Spring Security for a security aspect
   * move authentication attempts data gathering to an interceptor
-  * (optional) change authentication and authorisation to a token-based solution
+  * use the database instead of in-memory mock
+  * (optional) change authentication and authorisation mechanisms to a token-based solution
 
 
