@@ -2,7 +2,7 @@
 
 ### First important thing is a remark is that I did read the instruction with understanding :)
 
-After conversation with Joffrey and me clearly stating that I do not have huge experience with node.js we agreed that I will implement the solution with a different backend stack - Java based.
+During the initial conversation with Joffrey I clearly stated that I do not have huge experience with node.js we agreed that I will implement the solution with a different backend stack - Java based.
 I went for Java 8 + Spring MVC running on Jetty 9. Because of such stack the build tool is Maven.
 
 I focused on providing clear and fully unit-tested solution on both frontend and backend sides.
@@ -37,6 +37,6 @@ Because of the Java backend, the sign-in is based on sessions (with jsessionid b
   * move authentication attempts data gathering to an interceptor
   * use the database instead of in-memory mock
   * (optional) change authentication and authorisation mechanisms to a token-based solution
-  * not to require the "index.html" in the path :)
+  * not to require the "index.html" in the URL :)
 
 
