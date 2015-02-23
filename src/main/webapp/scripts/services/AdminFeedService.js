@@ -20,8 +20,7 @@ angular.module('skyAdmin')
 
 				$http({
 					url : '/admin/feed/auth-attempts',
-					method : 'GET',
-					data : { }
+					method : 'GET'
 				})
 				.then(function getAuthAttemptsSuccess(response) {
 					onSuccess(response.data);

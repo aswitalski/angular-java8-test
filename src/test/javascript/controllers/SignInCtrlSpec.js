@@ -23,7 +23,7 @@ describe('Sign In Controller', function() {
   });
 
   describe('$scope.onSignIn', function() {
-    it('should clear credentials and auth objects', function() {
+    it('should clear credentials and set new auth object', function() {
       $scope.credentials = {
         username : 'user',
         password : 'pass'
