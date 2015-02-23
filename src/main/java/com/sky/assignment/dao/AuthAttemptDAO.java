@@ -7,7 +7,7 @@ import com.sky.assignment.model.AuthAttemptDto;
 /**
  * Simple interface for managing persistence of authentication attempts.
  * 
- * @author sensei
+ * @author switalski
  */
 public interface AuthAttemptDAO {
 	

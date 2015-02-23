@@ -3,7 +3,7 @@ package com.sky.assignment.model;
 /**
  * Authentication result, either success or failure.
  * 
- * @author sensei
+ * @author switalski
  */
 public enum AuthResult {
 	
