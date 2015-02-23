@@ -12,14 +12,11 @@ angular.module('skyApp')
 
 	.controller('AdminCtrl', ['$scope', '$window', 'skyAdminFeedService', function ($scope, $window, feedService) {
 
-		$scope.fetchLog = function fetchLog() {
-			var self = this;
-			feedService.getAuthAttempts(function onSuccess(data) {
-				self.attempts = data;
-			}, function onError(error) {
-				self.displayError(error);
-			});
+		$scope.assignAttempts = function assignAttempts(attempts) {
+			$scope.attempts = attempts;
 		};
 
-
+		$scope.fetchLog = function fetchLog() {
+			feedService.getAuthAttempts($scope.assignAttempts, $scope.displayError);
+		};
 	}]);
