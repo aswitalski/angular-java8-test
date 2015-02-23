@@ -6,6 +6,7 @@ After conversation with Joffrey and me clearly stating that I do not have huge e
 I went for Java 8 + Spring MVC running on Jetty 9. Because of such stack the build tool is Maven.
 
 I focused on providing clear and fully-unit tested solution on both frontend and backend sides.
+(Because of lack of time the end-to-end testing is not yet there, but all other work that was done hopefully is enough to grade the skills and the approach).
 
 ### To build the project
     $mvn clean install
@@ -16,13 +17,14 @@ I focused on providing clear and fully-unit tested solution on both frontend and
 ### Then the application will be available at:
     http://localhost:8080/index.html
 
-Because of the Java backend, the sign-in in based on sessions (with jsessionid being passed over), an alternative could be based on auth tokens.
+Because of the Java backend, the sign-in is based on sessions (with jsessionid being passed over), an alternative could be based on auth tokens.
 
 ### With this solution I tried to demonstrate how to:
   * structure the applications correctly
   * define components with single responsibility
   * integrate the components with one another
   * fully unit test all the components
+  * construct the build process manually with full understanding of phases
   * provide good user experience
 
 ### If the application was developed further the next steps would be:
