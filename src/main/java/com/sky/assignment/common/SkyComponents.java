@@ -24,8 +24,4 @@ public interface SkyComponents {
 		String AUTH_ATTEMPT_DAO = "authAttemptDAO";
 	}
 	
-	/** Defines names of all utilized interceptors. */
-	interface Interceptors {
-		String AUTH_ATTEMPT_INTERCEPTOR = "authAttemptInterceptor";
-	}
 }
